@@ -3,26 +3,37 @@
         <v-toolbar-side-icon></v-toolbar-side-icon>
         <v-toolbar-title>BSD Forum</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-            <v-btn flat>
-                <router-link to="/forum">Forum</router-link>
-            </v-btn>
-            <v-btn flat>
-                <router-link to="/ask">Ask Question</router-link>
-            </v-btn>
-            <v-btn flat>
-                <router-link to="/category">Category</router-link>
-            </v-btn>
-            <v-btn flat>
-                <router-link to="/login">Login</router-link>
-            </v-btn>
-        </v-toolbar-items>
+        <div class="hidden-sm-and-down">
+            <router-link
+                    v-for="item in items"
+                    :key="item.title"
+                    :to="item.to"
+                    v-if="item.show">
+                <v-btn flat>{{ item.title }}</v-btn>
+            </router-link>
+        </div>
     </v-toolbar>
 </template>
 
 <script>
     export default {
-        name: "Toolbar"
+        name: "Toolbar",
+        data() {
+            return {
+                items: [
+                    {title: 'Forum', to: '/forum', show: true},
+                    {title: 'Login', to: '/login', show: !User.loggedIn()},
+                    {title: 'Ask Question', to: '/ask', show: User.loggedIn()},
+                    {title: 'Category', to: '/category', show: User.loggedIn()},
+                    {title: 'Logout', to: '/logout', show: User.loggedIn()},
+                ]
+            }
+        },
+        created() {
+            EventBus.$on('logout', () => {
+                User.logout();
+            })
+        }
     }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <div>
         <toolbar></toolbar>
-        <router-view><login></login></router-view>
+        <router-view></router-view>
         <app-footer></app-footer>
     </div>
 </template>
@@ -10,9 +10,10 @@
     import toolbar from './Toolbar';
     import AppFooter from './AppFooter';
     import Login from './login/Login'
+    import Signup from './login/Signup'
     export default {
         name: "AppHome",
-        components: {toolbar, AppFooter, Login}
+        components: {toolbar, AppFooter, Login, Signup}
     }
 </script>
 

@@ -2,9 +2,9 @@ class Token {
 
     isValid(token) {
         const payload = this.payload(token)
+
         if(payload) {
-            // Return true or false
-            return payload.iss == "http://forum-app.test/api/auth/login"
+            return payload.iss == "http://forum-app.test/api/auth/login" || "http://forum-app.test/api/auth/signup" ? true : false
         }
 
         return false
